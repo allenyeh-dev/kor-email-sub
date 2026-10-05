@@ -1,4 +1,5 @@
 import { listSubscribers } from "@/lib/db";
+import CopyEmailsButton from "./copy-emails-button";
 import LogoutButton from "./logout-button";
 
 export const dynamic = "force-dynamic";
@@ -17,7 +18,8 @@ export default async function AdminPage() {
             共 {subscribers.length} 位訂閱者 / {subscribers.length} total subscribers
           </p>
         </div>
-        <div className="flex gap-3">
+        <div className="flex gap-3 flex-wrap">
+          <CopyEmailsButton emails={subscribers.map((s) => s.email)} />
           <a
             href="/api/admin/export"
             className="border border-kor-gold text-kor-gold text-xs tracking-[0.15em] uppercase px-4 py-2 transition-colors hover:bg-kor-gold hover:text-black"
