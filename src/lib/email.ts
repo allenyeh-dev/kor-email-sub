@@ -82,9 +82,8 @@ KOR Taipei`;
 export async function sendWelcomeEmail(to: string): Promise<boolean> {
   const apiKey = process.env.BREVO_API_KEY;
   const senderEmail = process.env.BREVO_SENDER_EMAIL;
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/+$/, "");
 
-  if (!apiKey || !senderEmail || !siteUrl) {
+  if (!apiKey || !senderEmail) {
     console.error(
       "Welcome email skipped: BREVO_API_KEY, BREVO_SENDER_EMAIL and NEXT_PUBLIC_SITE_URL must be set",
     );
@@ -103,7 +102,7 @@ export async function sendWelcomeEmail(to: string): Promise<boolean> {
         sender: { name: process.env.BREVO_SENDER_NAME || "KOR Taipei", email: senderEmail },
         to: [{ email: to }],
         subject: "感謝您的訂閱 | Thank you for subscribing to KOR Taipei",
-        htmlContent: buildHtml(`${siteUrl}${LOGO_PATH}`),
+        htmlContent: buildHtml(`https://qrcode-system-img.kor-asia.com/logo/kor_logo.png`),
         textContent: TEXT,
       }),
     });
